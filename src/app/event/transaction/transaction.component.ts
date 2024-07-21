@@ -52,6 +52,8 @@ export class TransactionComponent {
 
       this.isLoadingTransactionList = false;
     } catch (error) {
+	  this.transactionList = [];
+	  
       const errorResponse = error as ApiResponse<null>;
 
       this.alert.showToast({ icon: 'error', title: errorResponse.message });

@@ -45,6 +45,8 @@ export class TicketComponent {
 
       this.isLoadingTicketList = false;
     } catch (error) {
+	  this.tickets = [];
+	  
       const errorResponse = error as ApiResponse<null>;
 
       this.alert.showToast({ icon: 'error', title: errorResponse.message });

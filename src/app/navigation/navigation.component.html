@@ -18,7 +18,7 @@
     <ul class="p-4">
       <li
         routerLink="/home/dashboard"
-        routerLinkActive="bg-white text-black"
+        routerLinkActive="active"
         class="text-white p-3 rounded-lg font-semibold hover:cursor-pointer mb-2 flex items-center hover:bg-white hover:text-black"
       >
         <i class="fas fa-house text-sm mr-2"></i>
@@ -34,7 +34,7 @@
       <li
         *ngFor="let nav of navigationData"
         routerLink="{{ nav.path }}"
-        routerLinkActive="bg-white text-black"
+        routerLinkActive="active"
         class="text-white p-3 rounded-lg font-semibold hover:cursor-pointer mb-2 flex items-center hover:bg-white hover:text-black"
       >
         <i class="{{ nav.icon }} text-sm mr-2"></i>

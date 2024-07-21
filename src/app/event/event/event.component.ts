@@ -53,7 +53,9 @@ export class EventComponent {
 
       this.isLoadingListEvent = false;
     } catch (error) {
-      const errorResponse = error as ApiResponse<null>;
+	  this.listEvent = [];
+      
+	  const errorResponse = error as ApiResponse<null>;
 
       this.alert.showToast({ icon: 'error', title: errorResponse.message });
 
