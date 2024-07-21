@@ -14,4 +14,8 @@ export class StorageService {
   public getToken(): string | null {
     return localStorage.getItem(this.TOKEN_IDENTIFIER);
   }
+
+  public clearStorage(): void {
+    localStorage.clear();
+  }
 }

@@ -1,0 +1,140 @@
+<h1 class="text-2xl font-bold">Ticket</h1>
+
+<div class="w-full bg-white rounded-lg p-4 mt-4">
+  <button
+    (click)="toggleTicketForm()"
+    *ngIf="!isShowingTicketForm"
+    class="bg-blue-500 text-white p-2 px-4 text-sm font-semibold rounded-lg hover:bg-blue-700"
+  >
+    <i class="fas fa-plus-circle mr-2"></i>
+    Ticket
+  </button>
+
+  <div *ngIf="isShowingTicketForm">
+    <h1 class="font-semibold">Add New Ticket</h1>
+
+    <hr class="bg-slate-100 h-1 mt-4 mb-4" />
+
+    <form class="px-2" [formGroup]="ticketForm" (ngSubmit)="create()">
+      <div class="grid grid-cols-3 mb-2 items-center">
+        <label class="text-sm font-semibold">Event</label>
+        <ng-select
+          class="col-span-2"
+          formControlName="event_id"
+          (open)="events()"
+          [loading]="isLoadingEventList"
+          bindLabel="name"
+          bindValue="id"
+          placeholder="Select an options"
+        >
+          <ng-option *ngFor="let item of eventList" [value]="item.id">
+            {{ item.name }}
+          </ng-option>
+        </ng-select>
+      </div>
+
+      <div class="grid grid-cols-3 mb-2 items-center">
+        <label class="text-sm font-semibold">Ticket Name</label>
+        <input
+          type="text"
+          placeholder="Enter ticket name"
+          class="col-span-2 p-2 border rounded-lg text-sm focus:outline-blue-500"
+          formControlName="name"
+        />
+      </div>
+
+      <div class="grid grid-cols-3 mb-2 items-center">
+        <label class="text-sm font-semibold">Ticket Price</label>
+        <input
+          type="number"
+          placeholder="Enter ticket price"
+          class="col-span-2 p-2 border rounded-lg text-sm focus:outline-blue-500"
+          formControlName="price"
+        />
+      </div>
+
+      <div class="grid grid-cols-3 mb-2 items-center">
+        <label class="text-sm font-semibold">Ticket Quota</label>
+        <input
+          type="number"
+          placeholder="Enter ticket quota"
+          class="col-span-2 p-2 border rounded-lg text-sm focus:outline-blue-500"
+          formControlName="quota"
+        />
+      </div>
+
+      <div class="grid grid-cols-3 mb-2 items-center">
+        <label class="text-sm font-semibold">Ticket Information</label>
+        <input
+          placeholder="Enter ticket information"
+          class="col-span-2 p-2 border rounded-lg text-sm focus:outline-blue-500"
+          formControlName="information"
+        />
+      </div>
+
+      <div class="flex flex-row gap-2 mt-4 justify-end">
+        <button
+          (click)="toggleTicketForm()"
+          type="button"
+          class="rounded-lg p-2 px-4 bg-slate-100 border text-sm font-semibold hover:bg-slate-300"
+        >
+          <i class="fas fa-times text-sm mr-1"></i>
+          Cancel
+        </button>
+        <button
+          class="rounded-lg p-2 px-4 bg-blue-500 text-sm font-semibold text-white hover:bg-blue-700"
+        >
+          <i class="fas fa-save text-sm mr-1"></i>
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="relative overflow-x-auto" *ngIf="!isShowingTicketForm">
+    <table class="w-full mt-4 text-sm text-left">
+      <thead class="text-xs uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="px-4 py-2">No.</th>
+          <th scope="col" class="px-4 py-2">Event</th>
+          <th scope="col" class="px-4 py-2">Ticket Name</th>
+          <th scope="col" class="px-4 py-2">Price</th>
+          <th scope="col" class="px-4 py-2">Quota</th>
+          <th scope="col" class="px-4 py-2">Information</th>
+          <th scope="col" class="px-4 py-2">Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!isLoadingTicketList">
+        <tr class="border-b" *ngFor="let item of tickets; let i = index">
+          <td class="px-4 py-2">{{ i + 1 }}</td>
+          <td class="px-4 py-2">{{ item.event.name }}</td>
+          <td class="px-4 py-2">{{ item.name }}</td>
+          <td class="px-4 py-2">{{ item.price }}</td>
+          <td class="px-4 py-2">{{ item.quota }}</td>
+          <td class="px-4 py-2">{{ item.information }}</td>
+          <td class="px-4 py-2">
+            <div class="flex flex-row gap-2">
+              <button (click)="update(item)">
+                <i
+                  class="fas fa-edit text-sm text-white bg-blue-500 hover:bg-blue-700 p-2 rounded-lg px-3"
+                ></i>
+              </button>
+              <button (click)="delete(item.id)">
+                <i
+                  class="fas fa-trash text-sm text-white bg-red-500 hover:bg-red-700 p-2 rounded-lg px-3"
+                ></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="animate-pulse w-full mt-4" *ngIf="isLoadingTicketList">
+      <div class="w-full h-8 bg-slate-100 mb-4"></div>
+      <div class="w-full h-8 bg-slate-100 mb-4"></div>
+      <div class="w-full h-8 bg-slate-100 mb-4"></div>
+      <div class="w-full h-8 bg-slate-100 mb-4"></div>
+      <div class="w-full h-8 bg-slate-100 mb-4"></div>
+    </div>
+  </div>
+</div>
