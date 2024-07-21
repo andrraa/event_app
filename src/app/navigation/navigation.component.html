@@ -25,6 +25,12 @@
         Dashboard
       </li>
 
+      <div class="animate-pulse" *ngIf="isLoading">
+        <li class="p-5 rounded-lg bg-slate-100 mb-2"></li>
+        <li class="p-5 rounded-lg bg-slate-100 mb-2"></li>
+        <li class="p-5 rounded-lg bg-slate-100 mb-2"></li>
+      </div>
+
       <li
         *ngFor="let nav of navigationData"
         routerLink="{{ nav.path }}"

@@ -26,9 +26,13 @@ export class NavigationComponent {
   }
 
   // Profile
+  isLoading: boolean = false;
+
   userData: ProfileSuccess | null | undefined = null;
 
   async profile() {
+    this.isLoading = true;
+
     try {
       const result: ApiResponse<ProfileSuccess> = await this.login.profile();
 
@@ -38,10 +42,14 @@ export class NavigationComponent {
           result.data?.role.role_name
         );
       }
+
+      this.isLoading = false;
     } catch (error) {
       const errorResponse = error as ApiResponse<null>;
 
       this.alert.showToast({ icon: 'error', title: errorResponse.message });
+
+      this.isLoading = false;
     }
   }
 
