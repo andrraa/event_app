@@ -10,6 +10,8 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [EventComponent, TicketComponent, TransactionComponent],
   imports: [
@@ -18,6 +20,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    NgxPaginationModule,
   ],
 })
 export class EventModule {}

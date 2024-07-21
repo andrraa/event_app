@@ -27,6 +27,8 @@ export class EventComponent {
     this.listEvents();
   }
 
+  page: number = 1;
+
   isShowingForm: boolean = false;
 
   toggleFormVisibility(): void {

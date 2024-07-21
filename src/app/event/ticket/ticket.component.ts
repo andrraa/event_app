@@ -25,6 +25,8 @@ export class TicketComponent {
     this.ticketList();
   }
 
+  page: number = 1;
+
   // Ticket List
   isLoadingTicketList: boolean = false;
 

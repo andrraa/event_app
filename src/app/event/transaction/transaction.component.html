@@ -146,7 +146,7 @@
   </div>
 
   <div class="relative overflow-x-auto" *ngIf="!isShowingForm">
-    <table class="w-full mt-4 text-sm text-left">
+    <table class="w-full mt-4 text-sm text-left mb-2">
       <thead class="text-xs uppercase bg-gray-50">
         <tr>
           <th scope="col" class="px-4 py-2">No.</th>
@@ -165,9 +165,13 @@
       <tbody *ngIf="!isLoadingTransactionList">
         <tr
           class="border-b"
-          *ngFor="let item of transactionList; let i = index"
+          *ngFor="
+            let item of transactionList
+              | paginate : { itemsPerPage: 5, currentPage: page };
+            let i = index
+          "
         >
-          <td class="px-4 py-2">{{ i + 1 }}</td>
+          <td class="px-4 py-2">{{ (page - 1) * 5 + (i + 1) }}</td>
           <td class="px-4 py-2">{{ item.date }}</td>
           <td class="px-4 py-2">{{ item.event.name }}</td>
           <td class="px-4 py-2">{{ item.ticket.name }}</td>
@@ -201,5 +205,11 @@
       <div class="w-full h-8 bg-slate-100 mb-4"></div>
       <div class="w-full h-8 bg-slate-100 mb-4"></div>
     </div>
+    <pagination-controls
+      previousLabel="Previous"
+      nextLabel="Next"
+      (pageChange)="page = $event"
+    >
+    </pagination-controls>
   </div>
 </div>

@@ -33,6 +33,8 @@ export class TransactionComponent {
     this.transactions();
   }
 
+  page: number = 1;
+
   // Transaction List
   isLoadingTransactionList: boolean = false;
   transactionList: TransacationCreateSuccess[] = [];
