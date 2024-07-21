@@ -17,7 +17,7 @@ export const roleGuard: CanActivateFn = (
 
   const token = storage.getToken();
 
-  if (!token || token != null) {
+  if (token != null) {
     if (state.url.includes('login')) {
       router.navigateByUrl('/home/dashboard');
       return of(false);
